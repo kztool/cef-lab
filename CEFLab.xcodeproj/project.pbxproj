@@ -71,7 +71,6 @@
 		CEB5050E21F2E1B100D8C46B /* browser_window.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = browser_window.cc; sourceTree = "<group>"; };
 		CEB5051021F2E1B100D8C46B /* root_window_mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = root_window_mac.h; sourceTree = "<group>"; };
 		CEB5051421F2E1B100D8C46B /* client_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client_types.h; sourceTree = "<group>"; };
-		CEB5051621F2E1B100D8C46B /* resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resource.h; sourceTree = "<group>"; };
 		CEB5051821F2E1B100D8C46B /* image_cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image_cache.h; sourceTree = "<group>"; };
 		CEB5051921F2E1B100D8C46B /* main_context.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main_context.cc; sourceTree = "<group>"; };
 		CEB5051A21F2E1B100D8C46B /* temp_window_mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = temp_window_mac.h; sourceTree = "<group>"; };
@@ -193,7 +192,6 @@
 				CEB5050D21F2E1B100D8C46B /* main_context_impl.h */,
 				CEB5051921F2E1B100D8C46B /* main_context.cc */,
 				CEB5050121F2E1B100D8C46B /* main_context.h */,
-				CEB5051621F2E1B100D8C46B /* resource.h */,
 				CEB504FE21F2E1B100D8C46B /* root_window_create.cc */,
 				CEB5051021F2E1B100D8C46B /* root_window_mac.h */,
 				CEB504F621F2E1B100D8C46B /* root_window_mac.mm */,
