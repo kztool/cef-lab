@@ -14,29 +14,6 @@
 #include "shared/browser/main_message_loop_std.h"
 #include "shared/common/client_switches.h"
 
-namespace {
-  
-  // Returns the top menu bar with the specified |tag|.
-  NSMenuItem* GetMenuBarMenuWithTag(NSInteger tag) {
-    NSMenu* main_menu = [[NSApplication sharedApplication] mainMenu];
-    NSInteger found_index = [main_menu indexOfItemWithTag:tag];
-    if (found_index >= 0)
-      return [main_menu itemAtIndex:found_index];
-    return nil;
-  }
-  
-  // Returns the item in |menu| that has the specified |action_selector|.
-  NSMenuItem* GetMenuItemWithAction(NSMenu* menu, SEL action_selector) {
-    for (NSInteger i = 0; i < menu.numberOfItems; ++i) {
-      NSMenuItem* item = [menu itemAtIndex:i];
-      if (item.action == action_selector)
-        return item;
-    }
-    return nil;
-  }
-  
-}  // namespace
-
 // Receives notifications from the application. Will delete itself when done.
 @interface ClientAppDelegate : NSObject<NSApplicationDelegate> {
 @private
@@ -182,21 +159,6 @@ namespace {
   
   // Set the delegate for application events.
   [application setDelegate:self];
-  
-  if (!with_osr_) {
-    // Remove the OSR-related menu items when OSR is disabled.
-    NSMenuItem* tests_menu = GetMenuBarMenuWithTag(8);
-    if (tests_menu) {
-      NSMenuItem* set_fps_item = GetMenuItemWithAction(
-                                                       tests_menu.submenu, @selector(menuTestsSetFPS:));
-      if (set_fps_item)
-        [tests_menu.submenu removeItem:set_fps_item];
-      NSMenuItem* set_scale_factor_item = GetMenuItemWithAction(
-                                                                tests_menu.submenu, @selector(menuTestsSetScaleFactor:));
-      if (set_scale_factor_item)
-        [tests_menu.submenu removeItem:set_scale_factor_item];
-    }
-  }
   
   client::RootWindowConfig window_config;
   window_config.with_controls = with_controls_;
