@@ -7,25 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CEB504BA21F2CDB700D8C46B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB504B921F2CDB700D8C46B /* AppDelegate.m */; };
 		CEB504BC21F2CDB800D8C46B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB504BB21F2CDB800D8C46B /* Assets.xcassets */; };
-		CEB504BF21F2CDB800D8C46B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB504BD21F2CDB800D8C46B /* MainMenu.xib */; };
-		CEB504C221F2CDB800D8C46B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB504C121F2CDB800D8C46B /* main.m */; };
+		CEB504C221F2CDB800D8C46B /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = CEB504C121F2CDB800D8C46B /* main.mm */; };
+		CEB504D321F2CDDC00D8C46B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB504D221F2CDDC00D8C46B /* Assets.xcassets */; };
+		CEB504D921F2CDDC00D8C46B /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = CEB504D821F2CDDC00D8C46B /* main.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CEB504B521F2CDB700D8C46B /* CEFLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CEFLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEB504B821F2CDB700D8C46B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		CEB504B921F2CDB700D8C46B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CEB504BB21F2CDB800D8C46B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CEB504BE21F2CDB800D8C46B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		CEB504C021F2CDB800D8C46B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CEB504C121F2CDB800D8C46B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CEB504C121F2CDB800D8C46B /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		CEB504C321F2CDB800D8C46B /* CEFLab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CEFLab.entitlements; sourceTree = "<group>"; };
+		CEB504CD21F2CDDB00D8C46B /* CEFLab Helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CEFLab Helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEB504D221F2CDDC00D8C46B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CEB504D721F2CDDC00D8C46B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEB504D821F2CDDC00D8C46B /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		CEB504DA21F2CDDC00D8C46B /* CEFLab_Helper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CEFLab_Helper.entitlements; sourceTree = "<group>"; };
+		CEB504DF21F2D1D200D8C46B /* CEFLab Helper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "CEFLab Helper.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		CEB504B221F2CDB700D8C46B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEB504CA21F2CDDB00D8C46B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -39,6 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				CEB504B721F2CDB700D8C46B /* CEFLab */,
+				CEB504CE21F2CDDC00D8C46B /* CEFLab Helper */,
 				CEB504B621F2CDB700D8C46B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -47,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				CEB504B521F2CDB700D8C46B /* CEFLab.app */,
+				CEB504CD21F2CDDB00D8C46B /* CEFLab Helper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -54,15 +66,24 @@
 		CEB504B721F2CDB700D8C46B /* CEFLab */ = {
 			isa = PBXGroup;
 			children = (
-				CEB504B821F2CDB700D8C46B /* AppDelegate.h */,
-				CEB504B921F2CDB700D8C46B /* AppDelegate.m */,
 				CEB504BB21F2CDB800D8C46B /* Assets.xcassets */,
-				CEB504BD21F2CDB800D8C46B /* MainMenu.xib */,
 				CEB504C021F2CDB800D8C46B /* Info.plist */,
-				CEB504C121F2CDB800D8C46B /* main.m */,
+				CEB504C121F2CDB800D8C46B /* main.mm */,
 				CEB504C321F2CDB800D8C46B /* CEFLab.entitlements */,
 			);
 			path = CEFLab;
+			sourceTree = "<group>";
+		};
+		CEB504CE21F2CDDC00D8C46B /* CEFLab Helper */ = {
+			isa = PBXGroup;
+			children = (
+				CEB504DF21F2D1D200D8C46B /* CEFLab Helper.entitlements */,
+				CEB504D221F2CDDC00D8C46B /* Assets.xcassets */,
+				CEB504D721F2CDDC00D8C46B /* Info.plist */,
+				CEB504D821F2CDDC00D8C46B /* main.mm */,
+				CEB504DA21F2CDDC00D8C46B /* CEFLab_Helper.entitlements */,
+			);
+			path = "CEFLab Helper";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -75,6 +96,7 @@
 				CEB504B121F2CDB700D8C46B /* Sources */,
 				CEB504B221F2CDB700D8C46B /* Frameworks */,
 				CEB504B321F2CDB700D8C46B /* Resources */,
+				CEB504DE21F2CEEF00D8C46B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -83,6 +105,23 @@
 			name = CEFLab;
 			productName = CEFLab;
 			productReference = CEB504B521F2CDB700D8C46B /* CEFLab.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CEB504CC21F2CDDB00D8C46B /* CEFLab Helper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEB504DB21F2CDDC00D8C46B /* Build configuration list for PBXNativeTarget "CEFLab Helper" */;
+			buildPhases = (
+				CEB504C921F2CDDB00D8C46B /* Sources */,
+				CEB504CA21F2CDDB00D8C46B /* Frameworks */,
+				CEB504CB21F2CDDB00D8C46B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CEFLab Helper";
+			productName = "CEFLab Helper";
+			productReference = CEB504CD21F2CDDB00D8C46B /* CEFLab Helper.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -96,6 +135,14 @@
 				TargetAttributes = {
 					CEB504B421F2CDB700D8C46B = {
 						CreatedOnToolsVersion = 10.1;
+					};
+					CEB504CC21F2CDDB00D8C46B = {
+						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -113,6 +160,7 @@
 			projectRoot = "";
 			targets = (
 				CEB504B421F2CDB700D8C46B /* CEFLab */,
+				CEB504CC21F2CDDB00D8C46B /* CEFLab Helper */,
 			);
 		};
 /* End PBXProject section */
@@ -123,34 +171,57 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEB504BC21F2CDB800D8C46B /* Assets.xcassets in Resources */,
-				CEB504BF21F2CDB800D8C46B /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEB504CB21F2CDDB00D8C46B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEB504D321F2CDDC00D8C46B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CEB504DE21F2CEEF00D8C46B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "Contents=\"${BUILT_PRODUCTS_DIR}/${TARGET_NAME}.app/Contents\"\nmkdir -p \"${Contents}/Frameworks\"\ncp -r \"${SRCROOT}/libcef/${CONFIGURATION}/Chromium Embedded Framework.framework\" \"${Contents}/Frameworks/\"\ncp -r \"${SRCROOT}/Carthage/Build/Mac/CocoaLumberjack.framework\" \"${Contents}/Frameworks/\"\ncp -r \"${SRCROOT}/Carthage/Build/Mac/SVGKit.framework\" \"${Contents}/Frameworks/\"\ncp -r \"${BUILT_PRODUCTS_DIR}/${TARGET_NAME} Helper.app\" \"${Contents}/Frameworks/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CEB504B121F2CDB700D8C46B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEB504C221F2CDB800D8C46B /* main.m in Sources */,
-				CEB504BA21F2CDB700D8C46B /* AppDelegate.m in Sources */,
+				CEB504C221F2CDB800D8C46B /* main.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEB504C921F2CDDB00D8C46B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEB504D921F2CDDC00D8C46B /* main.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		CEB504BD21F2CDB800D8C46B /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEB504BE21F2CDB800D8C46B /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CEB504C421F2CDB800D8C46B /* Debug */ = {
@@ -268,16 +339,27 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = CEFLab/CEFLab.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CLANG_WARN_COMMA = NO;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/libcef ";
 				INFOPLIST_FILE = CEFLab/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"$(SRCROOT)/libcef/$(CONFIGURATION)/libcef_dll_wrapper.a",
+					"$(SRCROOT)/libcef/$(CONFIGURATION)/cef_sandbox.a",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kztool.dev.CEFLab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "'-mmacosx-version-min=10.11' ";
 			};
 			name = Debug;
 		};
@@ -285,16 +367,83 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = CEFLab/CEFLab.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CLANG_WARN_COMMA = NO;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/libcef ";
 				INFOPLIST_FILE = CEFLab/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"$(SRCROOT)/libcef/$(CONFIGURATION)/libcef_dll_wrapper.a",
+					"$(SRCROOT)/libcef/$(CONFIGURATION)/cef_sandbox.a",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kztool.dev.CEFLab;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "'-mmacosx-version-min=10.11' ";
+			};
+			name = Release;
+		};
+		CEB504DC21F2CDDC00D8C46B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_COMMA = NO;
+				CODE_SIGN_ENTITLEMENTS = "CEFLab Helper/CEFLab Helper.entitlements";
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/libcef ";
+				INFOPLIST_FILE = "CEFLab Helper/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"$(SRCROOT)/libcef/$(CONFIGURATION)/libcef_dll_wrapper.a",
+					"$(SRCROOT)/libcef/$(CONFIGURATION)/cef_sandbox.a",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kztool.dev.CEFLab-Helper";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "'-mmacosx-version-min=10.11' ";
+			};
+			name = Debug;
+		};
+		CEB504DD21F2CDDC00D8C46B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_COMMA = NO;
+				CODE_SIGN_ENTITLEMENTS = "CEFLab Helper/CEFLab Helper.entitlements";
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/libcef ";
+				INFOPLIST_FILE = "CEFLab Helper/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"$(SRCROOT)/libcef/$(CONFIGURATION)/libcef_dll_wrapper.a",
+					"$(SRCROOT)/libcef/$(CONFIGURATION)/cef_sandbox.a",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kztool.dev.CEFLab-Helper";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "'-mmacosx-version-min=10.11' ";
 			};
 			name = Release;
 		};
@@ -315,6 +464,15 @@
 			buildConfigurations = (
 				CEB504C721F2CDB800D8C46B /* Debug */,
 				CEB504C821F2CDB800D8C46B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEB504DB21F2CDDC00D8C46B /* Build configuration list for PBXNativeTarget "CEFLab Helper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEB504DC21F2CDDC00D8C46B /* Debug */,
+				CEB504DD21F2CDDC00D8C46B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
