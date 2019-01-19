@@ -10,7 +10,6 @@
 #include "include/base/cef_logging.h"
 #include "include/wrapper/cef_helpers.h"
 #include "browser/main_context.h"
-#include "browser/test_runner.h"
 #include "shared/browser/extension_util.h"
 #include "shared/browser/resource_util.h"
 #include "shared/common/client_switches.h"
@@ -374,7 +373,7 @@ scoped_refptr<ImageCache> RootWindowManager::GetImageCache() {
 void RootWindowManager::OnTest(RootWindow* root_window, int test_id) {
   REQUIRE_MAIN_THREAD();
 
-  test_runner::RunTest(root_window->GetBrowser(), test_id);
+  //test_runner::RunTest(root_window->GetBrowser(), test_id);
 }
 
 void RootWindowManager::OnExit(RootWindow* root_window) {

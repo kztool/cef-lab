@@ -10,8 +10,6 @@
 #include "browser/main_context_impl.h"
 #include "browser/resource.h"
 #include "browser/root_window.h"
-#include "browser/test_runner.h"
-#include "shared/browser/client_app_browser.h"
 #include "shared/browser/main_message_loop_external_pump.h"
 #include "shared/browser/main_message_loop_std.h"
 #include "shared/common/client_switches.h"
@@ -49,23 +47,6 @@ namespace {
 - (id)initWithControls:(bool)with_controls andOsr:(bool)with_osr;
 - (void)createApplication:(id)object;
 - (void)tryToTerminateApplication:(NSApplication*)app;
-- (void)testsItemSelected:(int)command_id;
-- (IBAction)menuTestsGetText:(id)sender;
-- (IBAction)menuTestsGetSource:(id)sender;
-- (IBAction)menuTestsWindowNew:(id)sender;
-- (IBAction)menuTestsWindowPopup:(id)sender;
-- (IBAction)menuTestsRequest:(id)sender;
-- (IBAction)menuTestsPluginInfo:(id)sender;
-- (IBAction)menuTestsZoomIn:(id)sender;
-- (IBAction)menuTestsZoomOut:(id)sender;
-- (IBAction)menuTestsZoomReset:(id)sender;
-- (IBAction)menuTestsSetFPS:(id)sender;
-- (IBAction)menuTestsSetScaleFactor:(id)sender;
-- (IBAction)menuTestsTracingBegin:(id)sender;
-- (IBAction)menuTestsTracingEnd:(id)sender;
-- (IBAction)menuTestsPrint:(id)sender;
-- (IBAction)menuTestsPrintToPdf:(id)sender;
-- (IBAction)menuTestsOtherTests:(id)sender;
 - (void)enableAccessibility:(bool)bEnable;
 @end
 
@@ -234,84 +215,6 @@ namespace {
   [[NSApplication sharedApplication] orderFrontStandardAboutPanel:nil];
 }
 
-- (void)testsItemSelected:(int)command_id {
-  // Retrieve the active RootWindow.
-  NSWindow* key_window = [[NSApplication sharedApplication] keyWindow];
-  if (!key_window)
-    return;
-  
-  scoped_refptr<client::RootWindow> root_window =
-  client::RootWindow::GetForNSWindow(key_window);
-  
-  CefRefPtr<CefBrowser> browser = root_window->GetBrowser();
-  if (browser.get())
-    client::test_runner::RunTest(browser, command_id);
-}
-
-- (IBAction)menuTestsGetText:(id)sender {
-  [self testsItemSelected:ID_TESTS_GETTEXT];
-}
-
-- (IBAction)menuTestsGetSource:(id)sender {
-  [self testsItemSelected:ID_TESTS_GETSOURCE];
-}
-
-- (IBAction)menuTestsWindowNew:(id)sender {
-  [self testsItemSelected:ID_TESTS_WINDOW_NEW];
-}
-
-- (IBAction)menuTestsWindowPopup:(id)sender {
-  [self testsItemSelected:ID_TESTS_WINDOW_POPUP];
-}
-
-- (IBAction)menuTestsRequest:(id)sender {
-  [self testsItemSelected:ID_TESTS_REQUEST];
-}
-
-- (IBAction)menuTestsPluginInfo:(id)sender {
-  [self testsItemSelected:ID_TESTS_PLUGIN_INFO];
-}
-
-- (IBAction)menuTestsZoomIn:(id)sender {
-  [self testsItemSelected:ID_TESTS_ZOOM_IN];
-}
-
-- (IBAction)menuTestsZoomOut:(id)sender {
-  [self testsItemSelected:ID_TESTS_ZOOM_OUT];
-}
-
-- (IBAction)menuTestsZoomReset:(id)sender {
-  [self testsItemSelected:ID_TESTS_ZOOM_RESET];
-}
-
-- (IBAction)menuTestsSetFPS:(id)sender {
-  [self testsItemSelected:ID_TESTS_OSR_FPS];
-}
-
-- (IBAction)menuTestsSetScaleFactor:(id)sender {
-  [self testsItemSelected:ID_TESTS_OSR_DSF];
-}
-
-- (IBAction)menuTestsTracingBegin:(id)sender {
-  [self testsItemSelected:ID_TESTS_TRACING_BEGIN];
-}
-
-- (IBAction)menuTestsTracingEnd:(id)sender {
-  [self testsItemSelected:ID_TESTS_TRACING_END];
-}
-
-- (IBAction)menuTestsPrint:(id)sender {
-  [self testsItemSelected:ID_TESTS_PRINT];
-}
-
-- (IBAction)menuTestsPrintToPdf:(id)sender {
-  [self testsItemSelected:ID_TESTS_PRINT_TO_PDF];
-}
-
-- (IBAction)menuTestsOtherTests:(id)sender {
-  [self testsItemSelected:ID_TESTS_OTHER_TESTS];
-}
-
 - (void)enableAccessibility:(bool)bEnable {
   // Retrieve the active RootWindow.
   NSWindow* key_window = [[NSApplication sharedApplication] keyWindow];
@@ -359,21 +262,11 @@ namespace client {
       
       // Create a ClientApp of the correct type.
       CefRefPtr<CefApp> app;
-      ClientApp::ProcessType process_type = ClientApp::GetProcessType(command_line);
-      if (process_type == ClientApp::BrowserProcess)
-        app = new ClientAppBrowser();
       
       // Create the main context object.
       scoped_ptr<MainContextImpl> context(new MainContextImpl(command_line, true));
       
       CefSettings settings;
-      
-      // When generating projects with CMake the CEF_USE_SANDBOX value will be defined
-      // automatically. Pass -DUSE_SANDBOX=OFF to the CMake command-line to disable
-      // use of the sandbox.
-#if !defined(CEF_USE_SANDBOX)
-      settings.no_sandbox = true;
-#endif
       
       // Populate the settings based on command line arguments.
       context->PopulateSettings(&settings);
@@ -387,9 +280,7 @@ namespace client {
       
       // Initialize CEF.
       context->Initialize(main_args, settings, app, NULL);
-      
-      // Register scheme handlers.
-      test_runner::RegisterSchemeHandlers();
+  
       
       // Create the application delegate and window.
       ClientAppDelegate* delegate = [[ClientAppDelegate alloc]

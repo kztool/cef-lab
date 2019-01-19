@@ -10,6 +10,8 @@
 #include <sstream>
 #include <string>
 
+#include "utils/utils.h"
+
 #include "include/base/cef_bind.h"
 #include "include/cef_browser.h"
 #include "include/cef_frame.h"
@@ -19,7 +21,6 @@
 #include "include/wrapper/cef_closure_task.h"
 #include "browser/main_context.h"
 #include "browser/root_window_manager.h"
-#include "browser/test_runner.h"
 #include "shared/browser/extension_util.h"
 #include "shared/browser/resource_util.h"
 #include "shared/common/client_switches.h"
@@ -155,14 +156,14 @@ void LoadErrorPage(CefRefPtr<CefFrame> frame,
         "<h3>Page failed to load.</h3>"
         "URL: <a href=\""
      << failed_url << "\">" << failed_url
-     << "</a><br/>Error: " << test_runner::GetErrorString(error_code) << " ("
+     << "</a><br/>Error: " << utils::GetErrorString(error_code) << " ("
      << error_code << ")";
 
   if (!other_info.empty())
     ss << "<br/>" << other_info;
 
   ss << "</body></html>";
-  frame->LoadURL(test_runner::GetDataURI(ss.str(), "text/html"));
+  frame->LoadURL(utils::GetDataURI(ss.str(), "text/html"));
 }
 
 // Return HTML string with information about a certificate.
@@ -251,14 +252,8 @@ ClientHandler::ClientHandler(Delegate* delegate,
       first_console_message_(true),
       focus_on_editable_field_(false) {
   DCHECK(!console_log_file_.empty());
-
-#if defined(OS_LINUX)
-  // Provide the GTK-based dialog implementation on Linux.
-  dialog_handler_ = new ClientDialogHandlerGtk();
-#endif
-
+        
   resource_manager_ = new CefResourceManager();
-  test_runner::SetupResourceManager(resource_manager_);
 
   // Read command line settings.
   CefRefPtr<CefCommandLine> command_line =
@@ -428,7 +423,7 @@ bool ClientHandler::OnConsoleMessage(CefRefPtr<CefBrowser> browser,
     fclose(file);
 
     if (first_console_message_) {
-      test_runner::Alert(
+      utils::Alert(
           browser, "Console messages written to \"" + console_log_file_ + "\"");
       first_console_message_ = false;
     }
@@ -463,7 +458,7 @@ void ClientHandler::OnDownloadUpdated(
   CEF_REQUIRE_UI_THREAD();
 
   if (download_item->IsComplete()) {
-    test_runner::Alert(browser, "File \"" +
+    utils::Alert(browser, "File \"" +
                                     download_item->GetFullPath().ToString() +
                                     "\" downloaded successfully.");
   }
@@ -476,7 +471,7 @@ bool ClientHandler::OnDragEnter(CefRefPtr<CefBrowser> browser,
 
   // Forbid dragging of URLs and files.
   if ((mask & DRAG_OPERATION_LINK) && !dragData->IsFragment()) {
-    test_runner::Alert(browser, "cefclient blocks dragging of URLs and files");
+    utils::Alert(browser, "cefclient blocks dragging of URLs and files");
     return true;
   }
 
@@ -510,7 +505,7 @@ bool ClientHandler::OnPreKeyEvent(CefRefPtr<CefBrowser> browser,
     // OnKeyEvent() method the space key would cause the window to scroll in
     // addition to showing the alert box.
     if (event.type == KEYEVENT_RAWKEYDOWN)
-      test_runner::Alert(browser, "You pressed the space bar!");
+      utils::Alert(browser, "You pressed the space bar!");
     return true;
   }
 
@@ -546,11 +541,11 @@ void ClientHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser) {
     CefMessageRouterConfig config;
     message_router_ = CefMessageRouterBrowserSide::Create(config);
 
-    // Register handlers with the router.
-    test_runner::CreateMessageHandlers(message_handler_set_);
-    MessageHandlerSet::const_iterator it = message_handler_set_.begin();
-    for (; it != message_handler_set_.end(); ++it)
-      message_router_->AddHandler(*(it), false);
+//    // Register handlers with the router.
+//    test_runner::CreateMessageHandlers(message_handler_set_);
+//    MessageHandlerSet::const_iterator it = message_handler_set_.begin();
+//    for (; it != message_handler_set_.end(); ++it)
+//      message_router_->AddHandler(*(it), false);
   }
 
   // Disable mouse cursor change if requested via the command-line flag.
@@ -692,8 +687,7 @@ CefRefPtr<CefResponseFilter> ClientHandler::GetResourceResponseFilter(
     CefRefPtr<CefResponse> response) {
   CEF_REQUIRE_IO_THREAD();
 
-  return test_runner::GetResourceResponseFilter(browser, frame, request,
-                                                response);
+  return NULL;
 }
 
 bool ClientHandler::OnQuotaRequest(CefRefPtr<CefBrowser> browser,
@@ -905,7 +899,7 @@ void ClientHandler::ShowSSLInformation(CefRefPtr<CefBrowser> browser) {
   RootWindowConfig config;
   config.with_controls = false;
   config.with_osr = is_osr();
-  config.url = test_runner::GetDataURI(ss.str(), "text/html");
+  config.url = utils::GetDataURI(ss.str(), "text/html");
   MainContext::Get()->GetRootWindowManager()->CreateRootWindow(config);
 }
 
