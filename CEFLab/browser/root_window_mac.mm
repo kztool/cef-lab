@@ -15,6 +15,34 @@
 #include "shared/browser/main_message_loop.h"
 #include "shared/common/client_switches.h"
 
+@interface NSBrowserWindow : NSWindow
+@end
+
+@implementation NSBrowserWindow
+- (BOOL) canBecomeKeyWindow { return YES; }
+- (BOOL) canBecomeMainWindow { return YES; }
+- (BOOL) acceptsFirstResponder { return YES; }
+- (BOOL) becomeFirstResponder { return YES; }
+- (BOOL) resignFirstResponder { return YES; }
+
+- (BOOL)windowShouldClose:(id)sender {
+  return YES;
+}
+
+- (void)performClose:(id)sender {
+  if([[self delegate] respondsToSelector:@selector(windowShouldClose:)])
+  {
+    if(![[self delegate] windowShouldClose:self]) return;
+  }
+  else if([self respondsToSelector:@selector(windowShouldClose:)])
+  {
+    if(![self windowShouldClose:self]) return;
+  }
+  
+  [self close];
+}
+@end
+
 // Receives notifications from controls and the browser window. Will delete
 // itself when done.
 @interface RootWindowDelegate : NSObject<NSWindowDelegate> {
@@ -89,9 +117,7 @@
 }
 
 - (IBAction)stopLoading:(id)sender {
-  CefRefPtr<CefBrowser> browser = root_window_->GetBrowser();
-  if (browser.get())
-    browser->StopLoad();
+  [window_ performClose:nil];
 }
 
 - (IBAction)takeURLStringValueFrom:(NSTextField*)sender {
@@ -471,17 +497,14 @@ void RootWindowMac::CreateRootWindow(const CefBrowserSettings& settings,
 
   // The CEF framework library is loaded at runtime so we need to use this
   // mechanism for retrieving the class.
-  Class window_class = NSClassFromString(@"UnderlayOpenGLHostingWindow");
+  Class window_class = NSClassFromString(@"NSBrowserWindow");
   CHECK(window_class);
 
   window_ = [[window_class alloc]
       initWithContentRect:window_rect
-                styleMask:(NSTitledWindowMask | NSClosableWindowMask |
-                           NSMiniaturizableWindowMask | NSResizableWindowMask |
-                           NSUnifiedTitleAndToolbarWindowMask)
+                styleMask:(NSClosableWindowMask)
                   backing:NSBackingStoreBuffered
                     defer:NO];
-  [window_ setTitle:@"cefclient"];
 
   // Create the delegate for control and browser window events.
   RootWindowDelegate* delegate =
@@ -492,20 +515,6 @@ void RootWindowMac::CreateRootWindow(const CefBrowserSettings& settings,
   // everything from the autorelease pool so the window isn't on the stack
   // during cleanup (ie, a window close from javascript).
   [window_ setReleasedWhenClosed:NO];
-
-  const cef_color_t background_color = MainContext::Get()->GetBackgroundColor();
-  [window_
-      setBackgroundColor:[NSColor
-                             colorWithCalibratedRed:float(CefColorGetR(
-                                                        background_color)) /
-                                                    255.0f
-                                              green:float(CefColorGetG(
-                                                        background_color)) /
-                                                    255.0f
-                                               blue:float(CefColorGetB(
-                                                        background_color)) /
-                                                    255.0f
-                                              alpha:1.f]];
 
   NSView* contentView = [window_ contentView];
   NSRect contentBounds = [contentView bounds];
